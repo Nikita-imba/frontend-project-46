@@ -11,9 +11,11 @@ program
   .version('1.0.0')
   .argument('<filepath1>')
   .argument('<filepath2>')
-  .option('-f, --format <type>', 'output format', 'stylish')
+  .option('-f, --format [type]', 'output format')
   .action((filepath1, filepath2, options) => {
-    const result = gendiff(filepath1, filepath2, options.format);
+    // Если format не указан, используем 'stylish'
+    const format = options.format || 'stylish';
+    const result = gendiff(filepath1, filepath2, format);
     console.log(result);
   });
 
