@@ -1,16 +1,16 @@
 import _ from 'lodash'
 
-const formatValue = (value) => {
+const formatValue = value => {
   if (_.isObject(value) && value !== null) return '[complex value]'
   if (typeof value === 'string') return `'${value}'`
   return String(value)
 }
 
-const plain = (tree) => {
+const plain = tree => {
   const iter = (nodes, path) => {
     const lines = nodes
-      .filter((node) => node.type !== 'unchanged')
-      .map((node) => {
+      .filter(node => node.type !== 'unchanged')
+      .map(node => {
         const currentPath = [...path, node.key].join('.')
         switch (node.type) {
           case 'nested':

@@ -11,7 +11,7 @@ const stringify = (value, depth) => {
   return `{\n${lines.join('\n')}\n${indent(depth)}  }`
 }
 
-const stylish = (tree) => {
+const stylish = tree => {
   const iter = (nodes, depth) => {
     const lines = nodes.map(node => {
       const leftIndent = indent(depth)
