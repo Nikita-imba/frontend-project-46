@@ -1,29 +1,41 @@
 import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
+import parse from './parsers.js';
 
 const genDiff = (filepath1, filepath2) => {
-  const data1 = JSON.parse(fs.readFileSync(path.resolve(filepath1), 'utf-8'));
-  const data2 = JSON.parse(fs.readFileSync(path.resolve(filepath2), 'utf-8'));
+  // Получаем абсолютные пути
+  const fullPath1 = path.resolve(process.cwd(), filepath1);
+  const fullPath2 = path.resolve(process.cwd(), filepath2);
 
-  // Получаем ключи и сортируем их (sortBy не мутирует исходный массив)
-  const keys = _.sortBy(_.union(_.keys(data1), _.keys(data2)));
+  // Читаем данные из файлов
+  const data1 = fs.readFileSync(fullPath1, 'utf-8');
+  const data2 = fs.readFileSync(fullPath2, 'utf-8');
 
-  const lines = keys.map((key) => {
-    if (!_.has(data1, key)) {
-      return `  + ${key}: ${data2[key]}`;
+  // Определяем расширение (формат)
+  const format1 = path.extname(filepath1);
+  const format2 = path.extname(filepath2);
+
+  // Парсим данные
+  const obj1 = parse(data1, format1);
+  const obj2 = parse(data2, format2);
+
+  const keys = _.sortBy(_.union(_.keys(obj1), _.keys(obj2)));
+
+  const result = keys.map((key) => {
+    if (!_.has(obj1, key)) {
+      return `  + ${key}: ${obj2[key]}`;
     }
-    if (!_.has(data2, key)) {
-      return `  - ${key}: ${data1[key]}`;
+    if (!_.has(obj2, key)) {
+      return `  - ${key}: ${obj1[key]}`;
     }
-    if (data1[key] !== data2[key]) {
-      // Важно: сначала минус (из 1-го файла), потом плюс (из 2-го)
-      return `  - ${key}: ${data1[key]}\n  + ${key}: ${data2[key]}`;
+    if (obj1[key] !== obj2[key]) {
+      return `  - ${key}: ${obj1[key]}\n  + ${key}: ${obj2[key]}`;
     }
-    return `    ${key}: ${data1[key]}`;
+    return `    ${key}: ${obj1[key]}`;
   });
 
-  return `{\n${lines.join('\n')}\n}`;
+  return `{\n${result.join('\n')}\n}`;
 };
 
 export default genDiff;
