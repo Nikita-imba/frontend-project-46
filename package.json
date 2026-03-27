@@ -8,8 +8,8 @@
     "gendiff": "bin/gendiff.js"
   },
   "scripts": {
-    "test": "jest",
-    "lint": "eslint ."
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "lint": "npx eslint ."
   },
   "keywords": [
     "difference",

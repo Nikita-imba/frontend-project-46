@@ -1,5 +1,11 @@
-# Automatic tests
+# Frontend Project Level 2: Gendiff
 
-After completing all the steps in the project, automatic tests will become available to you. Tests are run on each commit - once all tasks in the Hexlet interface are completed, make a commit, and the tests will run automatically.
+### Description
 
-The hexlet-check.yml file is responsible for running these tests - do not delete this file, edit it, or rename the repository.
+Gendiff is a command-line utility that compares two configuration files and shows the differences. It supports flat JSON files (and YAML in the future steps).
+
+### Installation
+
+```bash
+make install
+```
