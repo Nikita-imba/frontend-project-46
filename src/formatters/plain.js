@@ -9,7 +9,7 @@ const formatValue = (value) => {
 const plain = (tree) => {
   const iter = (nodes, path) => {
     const lines = nodes
-      .filter((node) => node.type !== 'unchanged')
+      .filter(node => node.type !== 'unchanged')
       .map((node) => {
         const currentPath = [...path, node.key].join('.')
         switch (node.type) {
