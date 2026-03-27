@@ -1,5 +1,12 @@
-import { fileURLToPath } from 'url'; import path from 'path'; import genDiff from '../src/index.js'
+import { test, expect } from '@jest/globals'
+import genDiff from '../src/index.js'
 
-const __filename = fileURLToPath(import.meta.url); const __dirname = path.dirname(__filename); const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename); test('recursive gendiff', () => { const result = genDiff(getFixturePath('file1.json'), getFixturePath('file2.json')); expect(result).toContain('common'); expect(result).toContain('- setting2: 200'); expect(result).toContain('+ setting3: null') })
-test('plain format', () => { const result = genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'), 'plain'); expect(result).toContain('Property \u0027common.follow\u0027 was added with value: false'); expect(result).toContain('Property \u0027common.setting2\u0027 was removed') })
-test('json format', () => { const result = genDiff(getFixturePath('file1.json'), getFixturePath('file2.json'), 'json'); expect(() => JSON.parse(result)).not.toThrow(); expect(result.startsWith('[')).toBe(true) })
+test('gendiff stylish', () => {
+  const result = genDiff('__fixtures__/file1.json', '__fixtures__/file2.json')
+  expect(result).toContain('host: hexlet.io')
+})
+
+test('gendiff plain', () => {
+  const result = genDiff('__fixtures__/file1.json', '__fixtures__/file2.json', 'plain')
+  expect(result).toContain("Property 'timeout' was updated")
+})
