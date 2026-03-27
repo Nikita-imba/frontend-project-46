@@ -3,7 +3,7 @@ import _ from 'lodash'
 const buildTree = (data1, data2) => {
   const keys = _.sortBy(_.union(_.keys(data1), _.keys(data2)))
 
-  return keys.map(key => {
+  return keys.map((key) => {
     if (!_.has(data1, key)) {
       return { key, type: 'added', value: data2[key] }
     }

@@ -12,6 +12,6 @@ rules:
   no-underscore-dangle: 'off'
   linebreak-style: 'off'
   semi: [error, never]
-  arrow-parens: [error, as-needed]
+  arrow-parens: [error, always] # Вот тут поменяли!
   comma-dangle: [error, always-multiline]
   eol-last: [error, always]

@@ -7,13 +7,13 @@ const stringify = (value, depth) => {
     return String(value)
   }
   const keys = _.keys(value)
-  const lines = keys.map(key => `${indent(depth + 1)}  ${key}: ${stringify(value[key], depth + 1)}`)
+  const lines = keys.map((key) => `${indent(depth + 1)}  ${key}: ${stringify(value[key], depth + 1)}`)
   return `{\n${lines.join('\n')}\n${indent(depth)}  }`
 }
 
-const stylish = tree => {
+const stylish = (tree) => {
   const iter = (nodes, depth) => {
-    const lines = nodes.map(node => {
+    const lines = nodes.map((node) => {
       const leftIndent = indent(depth)
       switch (node.type) {
         case 'nested':
