@@ -11,3 +11,4 @@ rules:
   import/extensions: 'off'
   no-underscore-dangle: 'off'
   linebreak-style: 'off'
+  semi: ['error', 'never']
