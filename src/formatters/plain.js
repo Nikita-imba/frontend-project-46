@@ -1,4 +1,4 @@
-﻿import _ from 'lodash'
+import _ from 'lodash'
 
 const formatValue = (value) => {
   if (_.isObject(value) && value !== null) return '[complex value]'
