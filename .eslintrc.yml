@@ -12,3 +12,5 @@ rules:
   no-underscore-dangle: 'off'
   linebreak-style: 'off'
   semi: ['error', 'never']
+  quotes: ['error', 'single']
+  indent: ['error', 2]

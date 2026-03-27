@@ -13,16 +13,16 @@ const plain = (tree) => {
       .map((node) => {
         const currentPath = [...path, node.key].join('.')
         switch (node.type) {
-          case 'nested':
-            return iter(node.children, [...path, node.key])
-          case 'added':
-            return `Property '${currentPath}' was added with value: ${formatValue(node.value)}`
-          case 'removed':
-            return `Property '${currentPath}' was removed`
-          case 'changed':
-            return `Property '${currentPath}' was updated. From ${formatValue(node.oldValue)} to ${formatValue(node.newValue)}`
-          default:
-            throw new Error(`Unknown type: ${node.type}`)
+        case 'nested':
+          return iter(node.children, [...path, node.key])
+        case 'added':
+          return `Property '${currentPath}' was added with value: ${formatValue(node.value)}`
+        case 'removed':
+          return `Property '${currentPath}' was removed`
+        case 'changed':
+          return `Property '${currentPath}' was updated. From ${formatValue(node.oldValue)} to ${formatValue(node.newValue)}`
+        default:
+          throw new Error(`Unknown type: ${node.type}`)
         }
       })
     return lines.flat().join('\n')

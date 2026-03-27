@@ -16,21 +16,21 @@ const stylish = (tree) => {
     const lines = nodes.map((node) => {
       const leftIndent = indent(depth)
       switch (node.type) {
-        case 'nested':
-          return `${leftIndent}  ${node.key}: {\n${iter(node.children, depth + 1)}\n${leftIndent}  }`
-        case 'added':
-          return `${leftIndent}+ ${node.key}: ${stringify(node.value, depth)}`
-        case 'removed':
-          return `${leftIndent}- ${node.key}: ${stringify(node.value, depth)}`
-        case 'changed':
-          return [
-            `${leftIndent}- ${node.key}: ${stringify(node.oldValue, depth)}`,
-            `${leftIndent}+ ${node.key}: ${stringify(node.newValue, depth)}`,
-          ].join('\n')
-        case 'unchanged':
-          return `${leftIndent}  ${node.key}: ${stringify(node.value, depth)}`
-        default:
-          throw new Error(`Unknown type: ${node.type}`)
+      case 'nested':
+        return `${leftIndent}  ${node.key}: {\n${iter(node.children, depth + 1)}\n${leftIndent}  }`
+      case 'added':
+        return `${leftIndent}+ ${node.key}: ${stringify(node.value, depth)}`
+      case 'removed':
+        return `${leftIndent}- ${node.key}: ${stringify(node.value, depth)}`
+      case 'changed':
+        return [
+          `${leftIndent}- ${node.key}: ${stringify(node.oldValue, depth)}`,
+          `${leftIndent}+ ${node.key}: ${stringify(node.newValue, depth)}`,
+        ].join('\n')
+      case 'unchanged':
+        return `${leftIndent}  ${node.key}: ${stringify(node.value, depth)}`
+      default:
+        throw new Error(`Unknown type: ${node.type}`)
       }
     })
     return lines.join('\n')
