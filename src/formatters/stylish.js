@@ -13,7 +13,7 @@ const stringify = (value, depth) => {
 
 const stylish = (tree) => {
   const iter = (nodes, depth) => {
-    const lines = nodes.map(node => {
+    const lines = nodes.map((node) => {
       const leftIndent = indent(depth)
       switch (node.type) {
         case 'nested':
