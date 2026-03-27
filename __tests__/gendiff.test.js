@@ -13,4 +13,3 @@ test('gendiff plain', () => {
   expect(result).toContain('Property \'common.setting2\' was removed');
   expect(result).toContain('Property \'common.setting3\' was updated. From true to null');
 });
- 
