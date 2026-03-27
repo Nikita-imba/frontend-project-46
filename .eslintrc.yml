@@ -1,4 +1,4 @@
-env:
+﻿env:
   node: true
   jest: true
   es2021: true
@@ -13,4 +13,4 @@ rules:
   linebreak-style: 'off'
   semi: ['error', 'never']
   quotes: ['error', 'single']
-  indent: ['error', 2]
+  indent: ['error', 4]
