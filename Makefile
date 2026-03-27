@@ -1,14 +1,14 @@
-install:
-npm ci
-
-publish:
-npm publish --dry-run
-
-lint:
-npx eslint .
+﻿install:
+	npm ci
 
 test:
-npm test
+	npm test
+
+lint:
+	npx eslint .
 
 test-coverage:
-npm test -- --coverage
+	npm test -- --coverage --coverageProvider=v8
+
+publish:
+	npm publish --dry-run
