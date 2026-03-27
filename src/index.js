@@ -1,23 +1,21 @@
 import fs from 'fs';
 import path from 'path';
-import _ from 'lodash';
 
-const genDiff = (path1, path2) => {
-  const data1 = JSON.parse(fs.readFileSync(path.resolve(path1), 'utf-8'));
-  const data2 = JSON.parse(fs.readFileSync(path.resolve(path2), 'utf-8'));
+const genDiff = (filepath1, filepath2) => {
+  // Получаем абсолютные пути (чтобы работало из любой папки)
+  const fullPath1 = path.resolve(process.cwd(), filepath1);
+  const fullPath2 = path.resolve(process.cwd(), filepath2);
 
-  const keys = _.sortBy(_.union(_.keys(data1), _.keys(data2)));
+  // Читаем файлы (Sync — как в задании)
+  const data1 = fs.readFileSync(fullPath1, 'utf-8');
+  const data2 = fs.readFileSync(fullPath2, 'utf-8');
 
-  const result = keys.map((key) => {
-    if (!_.has(data1, key)) return `  + ${key}: ${data2[key]}`;
-    if (!_.has(data2, key)) return `  - ${key}: ${data1[key]}`;
-    if (data1[key] !== data2[key]) {
-      return `  - ${key}: ${data1[key]}\n  + ${key}: ${data2[key]}`;
-    }
-    return `    ${key}: ${data1[key]}`;
-  });
+  // Парсим JSON в объекты
+  const obj1 = JSON.parse(data1);
+  const obj2 = JSON.parse(data2);
 
-  return `{\n${result.join('\n')}\n}`;
+  // Возвращаем строку с количеством ключей (для проверки шага)
+  return `JSON 1 has ${Object.keys(obj1).length} keys, JSON 2 has ${Object.keys(obj2).length} keys.`;
 };
 
 export default genDiff;
