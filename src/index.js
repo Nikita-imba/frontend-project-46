@@ -16,3 +16,5 @@ const genDiff = (path1, path2, formatName = 'stylish') => {
 };
 
 export default genDiff;
+
+// reset_git
