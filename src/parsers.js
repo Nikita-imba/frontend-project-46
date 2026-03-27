@@ -1,4 +1,4 @@
-import yaml from 'js-yaml'
+﻿import yaml from 'js-yaml'
 
 const parse = (data, format) => {
   switch (format) {
@@ -15,4 +15,3 @@ const parse = (data, format) => {
 export default parse
 
 // reset_git
-

@@ -1,4 +1,4 @@
-import _ from 'lodash'
+﻿import _ from 'lodash'
 
 const indent = (depth, spacesCount = 4) => ' '.repeat(depth * spacesCount - 2)
 
@@ -39,4 +39,3 @@ const stylish = (tree) => {
 }
 
 export default stylish
-

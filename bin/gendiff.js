@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+﻿#!/usr/bin/env node
 import { Command } from 'commander'
 import genDiff from '../src/index.js'
 
@@ -17,4 +17,3 @@ program
 program.parse(process.argv)
 
 // reset_git
-

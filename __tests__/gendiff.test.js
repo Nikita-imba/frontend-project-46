@@ -1,4 +1,4 @@
-import { test, expect } from '@jest/globals'
+﻿import { test, expect } from '@jest/globals'
 import genDiff from '../src/index.js'
 
 test('gendiff stylish', () => {
@@ -15,4 +15,3 @@ test('gendiff plain', () => {
 })
 
 // reset_git
-
