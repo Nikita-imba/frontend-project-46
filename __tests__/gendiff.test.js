@@ -8,5 +8,5 @@ test('gendiff stylish', () => {
 
 test('gendiff plain', () => {
   const result = genDiff('__fixtures__/file1.json', '__fixtures__/file2.json', 'plain')
-  expect(result).toContain("Property 'timeout' was updated")
+  expect(result).toContain('Property \'timeout\' was updated')
 })
