@@ -18,4 +18,3 @@ const format = (tree, formatName) => {
 export default format
 
 // reset_git
-

@@ -17,4 +17,3 @@ program
 program.parse(process.argv)
 
 // reset_git
-
