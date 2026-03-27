@@ -1,21 +1,35 @@
 import fs from 'fs';
 import path from 'path';
+import _ from 'lodash';
 
 const genDiff = (filepath1, filepath2) => {
-  // Получаем абсолютные пути (чтобы работало из любой папки)
   const fullPath1 = path.resolve(process.cwd(), filepath1);
   const fullPath2 = path.resolve(process.cwd(), filepath2);
 
-  // Читаем файлы (Sync — как в задании)
-  const data1 = fs.readFileSync(fullPath1, 'utf-8');
-  const data2 = fs.readFileSync(fullPath2, 'utf-8');
+  const data1 = JSON.parse(fs.readFileSync(fullPath1, 'utf-8'));
+  const data2 = JSON.parse(fs.readFileSync(fullPath2, 'utf-8'));
 
-  // Парсим JSON в объекты
-  const obj1 = JSON.parse(data1);
-  const obj2 = JSON.parse(data2);
+  // Получаем все ключи из обоих объектов, сортируем их по алфавиту
+  const keys = _.sortBy(_.union(_.keys(data1), _.keys(data2)));
 
-  // Возвращаем строку с количеством ключей (для проверки шага)
-  return `JSON 1 has ${Object.keys(obj1).length} keys, JSON 2 has ${Object.keys(obj2).length} keys.`;
+  const result = keys.map((key) => {
+    // 1. Ключа нет в первом, но есть во втором (Добавлен)
+    if (!_.has(data1, key)) {
+      return `  + ${key}: ${data2[key]}`;
+    }
+    // 2. Ключ есть в первом, но нет во втором (Удален)
+    if (!_.has(data2, key)) {
+      return `  - ${key}: ${data1[key]}`;
+    }
+    // 3. Ключи есть в обоих, но значения разные (Изменен)
+    if (data1[key] !== data2[key]) {
+      return `  - ${key}: ${data1[key]}\n  + ${key}: ${data2[key]}`;
+    }
+    // 4. Значения одинаковые (Не изменился)
+    return `    ${key}: ${data1[key]}`;
+  });
+
+  return `{\n${result.join('\n')}\n}`;
 };
 
 export default genDiff;
